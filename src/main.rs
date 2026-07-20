@@ -1,18 +1,18 @@
 fn main() {
-    // Function ko call kar rahe hain
-    say_hello();
+    // 1. Ownership Transfer (Move)
+    let s1 = String::from("Solana");
+    let s2 = s1; // 's1' ka owner ab 's2' ban gaya. s1 ab valid nahi raha!
+
+    // println!("{}", s1); // Agar isay uncomment karenge to Rust compile error dega!
+    println!("s2 ki value hai: {}", s2);
+
+    // 2. Borrowing / Reference (&)
+    let name = String::from("Sajjad");
+    print_length(&name); // & lagane se ownership transfer nahi hoti, sirf read access milta hai
     
-    // Values pass karke add function call kar rahe hain
-    let sum = add(15, 25);
-    println!("Dono numbers ka sum hai: {}", sum);
+    println!("Main abhi bhi '{}' ko yahan use kar sakta hoon!", name);
 }
 
-// Chhota sa custom function
-fn say_hello() {
-    println!("Solana Rust Developer Journey!");
-}
-
-// Parameters lene wala aur value return karne wala function
-fn add(a: i32, b: i32) -> i32 {
-    a + b // Rust mein aakhri line par semicolon (;) na lagayein to wo return ho jata hai
+fn print_length(s: &String) {
+    println!("String ki length hai: {}", s.len());
 }
