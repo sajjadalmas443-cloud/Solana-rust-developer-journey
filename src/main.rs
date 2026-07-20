@@ -1,31 +1,25 @@
-// 1. Result Enum: Success (Ok) ya Failure (Err) handle karne ke liye
-fn divide(numerator: f64, denominator: f64) -> Result<f64, String> {
-    if denominator == 0.0 {
-        Err(String::from("Zero se divide nahi ho sakta!"))
-    } else {
-        Ok(numerator / denominator)
-    }
-}
-
-// 2. Option Enum: Something (Some) ya Nothing (None) ke liye
-fn find_user(id: u32) -> Option<String> {
-    if id == 1 {
-        Some(String::from("Sajjad"))
-    } else {
-        None
-    }
-}
+use std::collections::HashMap;
 
 fn main() {
-    // Result Test
-    match divide(10.0, 2.0) {
-        Ok(result) => println!("Division result: {}", result),
-        Err(e) => println!("Error aaya: {}", e),
-    }
+    // 1. Vector: Resizable List (Aisa array jo chhota/bada ho sakta hai)
+    let mut solana_accounts: Vec<String> = Vec::new();
+    
+    // Items add karna
+    solana_accounts.push(String::from("Account_A"));
+    solana_accounts.push(String::from("Account_B"));
+    
+    println!("Pehla account: {}", solana_accounts[0]);
+    println!("Total accounts: {}", solana_accounts.len());
 
-    // Option Test
-    match find_user(1) {
-        Some(name) => println!("User mila: {}", name),
-        None => println!("User nahi mila!"),
+    // 2. HashMap: Key-Value Pair Data (Dictionary jaisa)
+    let mut balances: HashMap<String, u64> = HashMap::new();
+    
+    // Data insert karna
+    balances.insert(String::from("Sajjad"), 500);
+    balances.insert(String::from("Ali"), 250);
+
+    // Value read karna
+    if let Some(balance) = balances.get("Sajjad") {
+        println!("Sajjad ka balance hai: {} SOL", balance);
     }
 }
