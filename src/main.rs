@@ -1,18 +1,35 @@
-fn main() {
-    // 1. Ownership Transfer (Move)
-    let s1 = String::from("Solana");
-    let s2 = s1; // 's1' ka owner ab 's2' ban gaya. s1 ab valid nahi raha!
-
-    // println!("{}", s1); // Agar isay uncomment karenge to Rust compile error dega!
-    println!("s2 ki value hai: {}", s2);
-
-    // 2. Borrowing / Reference (&)
-    let name = String::from("Sajjad");
-    print_length(&name); // & lagane se ownership transfer nahi hoti, sirf read access milta hai
-    
-    println!("Main abhi bhi '{}' ko yahan use kar sakta hoon!", name);
+// 1. Struct (Custom Data Type)
+struct UserAccount {
+    username: String,
+    balance: u64,
+    is_active: bool,
 }
 
-fn print_length(s: &String) {
-    println!("String ki length hai: {}", s.len());
+// 2. Enum (Options/States define karne ke liye)
+enum AccountStatus {
+    Active,
+    Frozen,
+    Closed,
+}
+
+fn main() {
+    // Struct ka instance banana
+    let user = UserAccount {
+        username: String::from("Sajjad"),
+        balance: 100,
+        is_active: true,
+    };
+
+    println!("User: {}", user.username);
+    println!("Balance: {} SOL", user.balance);
+
+    // Enum value set karna
+    let status = AccountStatus::Active;
+
+    // Pattern Matching (Match Statement)
+    match status {
+        AccountStatus::Active => println!("Account status: Active hai!"),
+        AccountStatus::Frozen => println!("Account status: Frozen hai!"),
+        AccountStatus::Closed => println!("Account status: Closed hai!"),
+    }
 }
